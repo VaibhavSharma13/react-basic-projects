@@ -32,6 +32,9 @@ function App() {
     passwordRef.current?.select();
 
     window.navigator.clipboard.writeText(password);
+
+    const btnElement = document.querySelector('button');
+    btnElement.innerText = 'Copied';
   }, [password]);
 
   // this hook is used to re-render the function if any of the dependencies have changed
@@ -54,7 +57,7 @@ function App() {
           />
           <button
           onClick={copyToClipboard}
-          className='outline-none bg-blue-700 text-white px-3 rounded-r-lg shrink-0'>Copy</button>
+          className='outline-none bg-blue-700 text-white px-3 rounded-r-lg shrink-0 hover:bg-blue-600'>Copy</button>
         </div>
 
         <div className='flex text-sm gap-x-2'>
