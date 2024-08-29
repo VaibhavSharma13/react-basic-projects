@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import './App.css'
-import { TodoProvider, TodoContext } from './contexts'
+import { TodoProvider } from './contexts'
 import { TodoForm, TodoItem } from './components'
 
 function App() {
@@ -8,34 +8,26 @@ function App() {
   const [todos, setTodos] = useState([]);
 
   const addTodo = (todo) => {
-    console.log({...todo});
     
     setTodos((prev) => [{id: Date.now(), ...todo}, ...prev])
   }
 
   const updateTodo = (id, todo) => {
-    setTodos((prev) => {
-      prev.map((TODO) => TODO.id === id ? todo : TODO);
-    })
+    setTodos((prev) => prev.map((TODO) => (TODO.id === id ? todo : TODO)))
   }
 
   // filter is better to use then map function for delete tasks
   const deleteTodo = (id) => {
-    setTodos((prev) => {
-      prev.filter((TODO) => TODO.id !== id);
-    })
+    setTodos((prev) => prev.filter((TODO) => TODO.id !== id))
   }
 
   const toggleTodo = (id) => {
-    setTodos((prev) =>{
-      prev.map((TODO) => TODO.id === id ? {...TODO, completed: !TODO.completed} : TODO);
-    });
+    setTodos((prev) =>
+      prev.map((TODO) => TODO.id === id ? {...TODO, completed: !TODO.completed} : TODO))
   }
 
   useEffect(() => {
     const todos = JSON.parse(localStorage.getItem("todos"));
-
-    // console.log(todos);
     
     if(todos && todos.length>0){
       setTodos(todos)
