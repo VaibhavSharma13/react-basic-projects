@@ -29,7 +29,7 @@ export const todoSlice = createSlice({
       console.log(action);
 
       state.todos = state.todos.map((todo) =>
-        todo.id === action.payload.id ? action.payload : todo
+        todo.id === action.payload.id ? {...todo, text: action.payload.text} : todo
       );
     },
   },
